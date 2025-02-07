@@ -7,7 +7,6 @@ import scipy.stats as stats
 def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm=True, tol=0.05):
 
 	total = []
-	
 	for o in ori_data:
 		data = o
 		if unnorm:
