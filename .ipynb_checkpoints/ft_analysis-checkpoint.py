@@ -3,10 +3,12 @@
 import numpy as np
 from scipy.fft import fft, fftfreq
 import scipy.stats as stats
+from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
 
-def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm=True, tol=0.05):
-
+def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm=True, plot=False, tol=0.05):
 	total = []
+	
 	for o in ori_data:
 		data = o
 		if unnorm:
@@ -24,9 +26,16 @@ def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm
 		total.append(np.mean(subtotal))
 
 	stat, p = stats.shapiro(total)
+	mean, sd = stats.norm.fit(total)
+
+	if plot:
+		plt.hist(total)
+		plt.show()
+		
 
 	if p >= tol:
 		print(f"{p} >= {tol} --- Likely Gaussian Distribution")
+		print(f"The distribution has mean {mean} and standard deviation {sd}")
 		return True
 	else:
 		print(f"{p} < {tol} --- Unlikely Gaussian Distribution")
