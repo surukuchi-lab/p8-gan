@@ -2,21 +2,24 @@ import numpy as np
 
 def init_standard_parameters():
 	# samples, seq_len, s_rate, dim
-	return 1000, 100, 1/24, 5
+	return 1000, 100, 24, 5
 
-def sine_data_generation(n_samples=1000, seq_len=100, s_rate=1/24, dim=5, mean=5, sd=1):
+def sine_data_generation(waves=1000, samples=1e6, seq_len=2e2, cycles=2e5, dim=5):
 	data = []
 
-	if not 1/((mean + 3*sd) * 2) * 1/s_rate >= 1:
+	if not samples/cycles >= 2: # ~ 5
 		raise Exception("Less than 2 samples per cycle. Choose a different frequency or sampling rate.")
+
+	f = cycles/seq_len # ~ 1000
+	sd = 0.02*f
 	
-	for _ in range(n_samples):
+	for _ in range(waves):
         
 		seq = []
 		for _dim in range(dim):
-			freq = np.random.normal(mean, sd)
-			phase = np.random.normal(mean, sd)
-			x = np.linspace(0, seq_len*s_rate, seq_len)
+			freq = np.random.normal(f, sd)
+			phase = np.random.normal(f, sd)
+			x = np.linspace(0, int(seq_len), int(samples))
 			y = np.sin(freq*x*2*np.pi+phase)
 			seq.append((y+1)*0.5)
 		seq = np.transpose(np.array(seq))

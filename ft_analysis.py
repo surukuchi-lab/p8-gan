@@ -6,7 +6,7 @@ import scipy.stats as stats
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
-def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm=True, plot=False, tol=0.05):
+def fidelity_analysis(ori_data, seq_len=2e2, samples=1e6, cycles=2e5, unnorm=True, plot=False, tol=0.05):
 	total = []
 	
 	for o in ori_data:
@@ -16,7 +16,7 @@ def fidelity_analysis(ori_data, no=1000, seq_len=100, s_rate=1/24, dim=5, unnorm
 		subtotal = []
 		for d in data:
 			yf = np.abs(fft(d)) # transform data
-			xf = fftfreq(seq_len, s_rate) # frequency spread, find analytic sample rate expression
+			xf = fftfreq(int(samples), seq_len/samples) # frequency spread, find analytic sample rate expression
 			
 			#subtotal.append(xf[np.where(np.isclose(yf, max(np.abs(yf))))][0]) # get frequency
 			idx = np.argmax(yf)
