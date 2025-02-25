@@ -1,0 +1,11 @@
+name: timegan_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.11
+  - numpy
+  - matplotlib
+  - tensorflow
+  - scikit-learn
+  - scipy
