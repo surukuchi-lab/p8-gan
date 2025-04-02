@@ -4,8 +4,12 @@ channels:
   - defaults
 dependencies:
   - python=3.10.9
+  - pip
   - numpy
   - matplotlib
-  - tensorflow
   - scikit-learn
   - scipy
+  - notebook
+  - ipykernel
+  - pip:
+    - "tensorflow[and-cuda]"
