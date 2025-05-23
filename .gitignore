@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.py[cod]
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+# Environments
+env/
+.env
