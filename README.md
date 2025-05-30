@@ -1,4 +1,4 @@
-# p8-gan
+# Project 8 GAN
 
 Generative algorithm based on the TimeGAN architecture for Project 8 data, migrated from TensorFlow 1.x to TensorFlow 2.x and PyTorch implementations.
 
